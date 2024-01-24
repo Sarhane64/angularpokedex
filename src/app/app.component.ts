@@ -9,7 +9,7 @@ import { Pokeinterface } from './pokeinterface.js';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  testvar: Pokeinterface[] = [];
+  pokemon: Pokeinterface[] = [];
 
   constructor(private pokemonservService: PokemonservService) {}
 
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
       .getPokemons()
       .subscribe((results: Pokeinterface[]) => {
         console.log(results);
-        this.testvar = results;
+        this.pokemon = results;
       });
   }
 }

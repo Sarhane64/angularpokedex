@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 
 import { Pokeinterface } from './pokeinterface.js';
 
@@ -14,9 +15,23 @@ export class PokemonservService {
 
   constructor(private http: HttpClient) {}
 
+  getPokemonDetails(url: string): Observable<any> {
+    return this.http.get(url);
+  }
+
   getPokemons(): Observable<Pokeinterface[]> {
-    return this.http
-      .get<Pokeinterface[]>(this.apiUrl)
-      .pipe(map((resp: any) => resp.results));
+    return this.http.get<Pokeinterface[]>(this.apiUrl).pipe(
+      mergeMap((resp: any) => {
+        const pokemonObservables: Observable<any>[] = resp.results.map(
+          (pokemon: any) => {
+            return this.getPokemonDetails(pokemon.url);
+          }
+        );
+        return forkJoin(pokemonObservables);
+      }),
+      map((pokemonDetails: any[]) => {
+        return pokemonDetails;
+      })
+    );
   }
 }

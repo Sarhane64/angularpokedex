@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  justify-content: center;
+  display: flex;
+}
+
+.sectionListPokemon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.listContainerPokemon {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 20px;
+  width: 250px;
+  background: rgb(196, 92, 92);
+}
+li {
+  list-style: none;
+  text-align: center;
+}

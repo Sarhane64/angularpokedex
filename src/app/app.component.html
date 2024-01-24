@@ -1,9 +1,11 @@
 <router-outlet></router-outlet>
-<section>
-  <div *ngFor="let pokemon of testvar">
-    <h2>{{ pokemon.name }}</h2>
-    <!-- <ul *ngFor="let ability of pokrmon.url.abilties">
-      <li>{{ ability.name | undifined }}</li>
-    </ul> -->
+<h1>Pokedex</h1>
+<section class="sectionListPokemon">
+  <div class="listContainerPokemon" *ngFor="let pokemon of pokemon">
+    <h2 class="pokemonTitle">{{ pokemon.name }}</h2>
+    <div class="typePokemon" *ngFor="let ability of pokemon.abilities">
+      <li>{{ ability.ability.name }}</li>
+    </div>
+    <img src="{{ pokemon.sprites.front_default }}" />
   </div>
 </section>
